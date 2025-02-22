@@ -47,4 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.getElementById("kiara-bday")) {
         startCountdown("kiara-bday", { month: 11, day: 22 });
     }
+    
 });
+
+function flipCard(card) {
+    card.classList.toggle("flipped");
+}
