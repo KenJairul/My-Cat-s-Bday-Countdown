@@ -16,7 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const countdownElement = document.getElementById(id);
             if (countdownElement) {
-                countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                const today = new Date();
+                if (today.getMonth() === birthday.month - 1 && today.getDate() === birthday.day) {
+                    countdownElement.innerHTML = "Today's my birthday! 🎂";
+                } else {
+                    countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                }
             }
 
             setTimeout(updateCountdown, 1000);
@@ -24,31 +29,22 @@ document.addEventListener("DOMContentLoaded", function () {
         updateCountdown();
     }
 
-    if (document.getElementById("shadow-bday")) {
-        startCountdown("shadow-bday", { month: 5, day: 9 });
-    }
+    const birthdays = {
+        "shadow-bday": { month: 5, day: 9 },
+        "angelog-bday": { month: 10, day: 19 },
+        "kiatot-bday": { month: 8, day: 25 },
+        "kawot-bday": { month: 3, day: 8 }, 
+        "kira-bday": { month: 7, day: 5 },
+        "kiara-bday": { month: 11, day: 22 }
+    };
 
-    if (document.getElementById("angelog-bday")) {
-        startCountdown("angelog-bday", { month: 10, day: 19 });
-    }
-
-    if (document.getElementById("kiatot-bday")) {
-        startCountdown("kiatot-bday", { month: 8, day: 25 });
-    }
-
-    if (document.getElementById("kawot-bday")) {
-        startCountdown("kawot-bday", { month: 3, day: 10 });
-    }
-
-    if (document.getElementById("kira-bday")) {
-        startCountdown("kira-bday", { month: 7, day: 5 });
-    }
-
-    if (document.getElementById("kiara-bday")) {
-        startCountdown("kiara-bday", { month: 11, day: 22 });
-    }
-    
+    Object.keys(birthdays).forEach(id => {
+        if (document.getElementById(id)) {
+            startCountdown(id, birthdays[id]);
+        }
+    });
 });
+
 
 function flipCard(card) {
     card.classList.toggle("flipped");
